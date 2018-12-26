@@ -147,9 +147,8 @@ public class DiskCache implements ImageCache {
                     }
                     // 缓存被写入后，再次查找key对应的缓存
                     snapShot = mDiskLruCache.get(key);
-                } else {
-                    Log.i(TAG, "get from disklrucache = " + imageUrl);
                 }
+
                 if (snapShot != null) {
                     fileInputStream = (FileInputStream) snapShot.getInputStream(0);
                     fileDescriptor = fileInputStream.getFD();
@@ -185,7 +184,7 @@ public class DiskCache implements ImageCache {
             BufferedOutputStream out = null;
             BufferedInputStream in = null;
             try {
-                final URL url = new URL(urlString);
+                URL url = new URL(urlString);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 in = new BufferedInputStream(urlConnection.getInputStream(), 8 * 1024);
                 out = new BufferedOutputStream(outputStream, 8 * 1024);
@@ -194,7 +193,7 @@ public class DiskCache implements ImageCache {
                     out.write(b);
                 }
                 return true;
-            } catch (final IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 if (urlConnection != null) {
