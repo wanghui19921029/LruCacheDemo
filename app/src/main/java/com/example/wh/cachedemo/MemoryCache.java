@@ -12,15 +12,15 @@ public class MemoryCache implements ImageCache {
 
     private MemoryCache() {
         // 获取应用程序最大可用内存
-        int maxMemory = (int) Runtime.getRuntime().maxMemory();
+        int maxMemory = (int) Runtime.getRuntime().maxMemory() / 1024;
         int maxSize = maxMemory / 8;
         // 设置图片缓存大小为程序最大可用内存的1/8
         mLruCache = new LruCache<String, Bitmap>(maxSize) {
             @Override
             protected int sizeOf(String key, Bitmap bitmap) {
-                return bitmap.getByteCount();
+                return bitmap.getByteCount() / 1024;
                 // 这种写法在一些手机上不好用，具体原因不清楚。
-                // return bitmap.getByteCount() * bitmap.getHeight();
+                // return bitmap.getByteCount() * bitmap.getHeight() / 1024;
             }
         };
     }
