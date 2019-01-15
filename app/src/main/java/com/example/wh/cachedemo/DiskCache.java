@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
-import com.example.wh.thirddisk.DiskLruCache;
+import com.example.wh.cachedemo.libcore.io.DiskLruCache;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
